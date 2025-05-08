@@ -48,8 +48,9 @@
       useEffect(() => {
         const checkPing = async () => {
           try {
-            const response = await fetch('https://yourserver.com/ping', { method: 'GET' });
-            if (response.ok) {
+            const response = await fetch('https://khajababa1139.github.io/.netlify/functions/ping', { method: 'GET' });
+            const data = await response.json();
+            if (data.pingReceived) {
               setPingStatus(true); // Ping received
             } else {
               setPingStatus(false); // Ping failed
