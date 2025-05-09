@@ -20,7 +20,7 @@
       useEffect(() => {
         const checkPing = async () => {
           try {
-            const response = await fetch('/ping', { method: 'GET' });
+            const response = await fetch('/', { method: 'GET' });
             if (response.ok) {
               setPingStatus(true); // Ping received
             } else {
