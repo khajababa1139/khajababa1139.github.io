@@ -50,3 +50,14 @@
   letter-spacing: 0.1em; text-transform: uppercase;
 }
 
+/* Cards without an image yet: collapse the empty thumbnail area and mark
+   the card with a signal-colour rule instead, so it doesn't read as broken. */
+.card__thumb:empty {
+  aspect-ratio: auto;
+  height: 4px;
+  background: linear-gradient(90deg, var(--signal), transparent);
+}
+
+/* Keep the scroll hint clear of the section rule on narrow screens. */
+.scroll-hint { white-space: nowrap; }
+@media (max-width: 34rem) { .scroll-hint { display: none; } }
