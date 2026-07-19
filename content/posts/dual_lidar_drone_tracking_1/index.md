@@ -1,7 +1,7 @@
 +++
 title = "Dual-LiDAR MAV tracking: from one blind sensor to two that cover for each other"
 date = 2026-07-20T10:00:00+06:00
-draft = true
+draft = false
 summary = "A single Livox Mid-360 lost the drone past 3m and jittered at range. Adding a second sensor fixed coverage but broke tracking in the overlap zone — this is how that got fixed."
 tags = ["ros2", "lidar", "kalman-filter", "robotics", "sensor-fusion"]
 video = ""   # paste your YouTube ID here, e.g. "dQw4w9WgXcQ"
