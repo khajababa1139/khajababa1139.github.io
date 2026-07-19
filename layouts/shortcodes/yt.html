@@ -1,0 +1,2 @@
+{{- $id := or (.Get "id") (.Get 0) -}}
+{{- partial "youtube.html" (dict "id" $id "title" (.Get "title")) -}}

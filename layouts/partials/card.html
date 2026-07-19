@@ -1,0 +1,21 @@
+{{ $thumb := "" }}
+{{ with .Resources.GetMatch "cover.*" }}
+  {{ $r := . }}
+  {{ if ne $r.MediaType.SubType "svg" }}{{ $r = $r.Fit "760x480 webp q80" }}{{ end }}
+  {{ $thumb = $r.RelPermalink }}
+{{ else }}
+  {{ with .Params.cover }}{{ $thumb = . | relURL }}
+  {{ else }}{{ with .Params.video }}{{ $thumb = printf "https://i.ytimg.com/vi/%s/hqdefault.jpg" . }}{{ end }}
+  {{ end }}
+{{ end }}
+
+<a class="card" href="{{ .RelPermalink }}">
+  <div class="card__thumb">
+    {{ with $thumb }}<img src="{{ . }}" alt="" loading="lazy" decoding="async">{{ end }}
+  </div>
+  <div class="card__body">
+    <h3 class="card__title">{{ .Title }}</h3>
+    <p class="card__sum">{{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 110 }}{{ end }}</p>
+    <span class="eyebrow">{{ .Date.Format "Jan 02, 2006" }}{{ if .Params.video }} · video{{ end }}</span>
+  </div>
+</a>

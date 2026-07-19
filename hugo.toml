@@ -1,0 +1,113 @@
+# =============================================================================
+# SITE CONFIGURATION
+# This is the only file you need to touch for identity, links, and features.
+# Everything else (projects list, styling, templates) lives in its own file:
+#   data/projects.yaml        -> the project cards on the landing page
+#   assets/css/*.css          -> styling, split by concern
+#   layouts/                  -> HTML templates
+# =============================================================================
+
+baseURL      = "https://khajababa1139.github.io/"
+title        = "Estyak Ahamed"
+languageCode = "en"
+
+enableGitInfo   = true
+enableRobotsTXT = true
+summaryLength   = 30
+
+[pagination]
+  pagerSize = 12
+
+# -----------------------------------------------------------------------------
+# Identity & landing-page copy
+# -----------------------------------------------------------------------------
+[params]
+  author  = "Estyak Ahamed"
+  role    = "Mechanical Engineering · BUET"
+  tagline = "I build autonomous systems — rovers, drones, and the software that drives them."
+
+  # Shown under the tagline on the landing page. Markdown allowed.
+  intro = """
+Undergraduate at the Bangladesh University of Engineering and Technology, and
+lead of the Autonomy & Software and Drone sub-teams at **Team Interplanetar**,
+BUET's Mars rover team. I work across ROS-based robotics, deep learning, and
+full-stack web — and I write up what I build here so others can learn from it.
+"""
+
+  email    = "estyak.ahamedd1139@gmail.com"
+  github   = "khajababa1139"
+  linkedin = "estyak1139"
+
+  showReadingTime = true
+
+  # ---------------------------------------------------------------------------
+  # Comments — giscus (GitHub Discussions).
+  # Setup steps are in README.md §"Turn on comments".
+  # Flip `enable` to true after filling repoId and categoryId from giscus.app.
+  # ---------------------------------------------------------------------------
+  [params.giscus]
+    enable           = false
+    repo             = "khajababa1139/khajababa1139.github.io"
+    repoId           = ""
+    category         = "Comments"
+    categoryId       = ""
+    mapping          = "pathname"
+    reactionsEnabled = "1"
+    inputPosition    = "top"
+
+# -----------------------------------------------------------------------------
+# Content rendering
+# -----------------------------------------------------------------------------
+[markup]
+  [markup.highlight]
+    style     = "github"
+    noClasses = false
+    lineNos   = false
+    tabWidth  = 2
+  [markup.goldmark.renderer]
+    unsafe = true            # allow raw HTML inside markdown posts
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel   = 3
+
+[taxonomies]
+  tag = "tags"
+
+# -----------------------------------------------------------------------------
+# Navigation
+# -----------------------------------------------------------------------------
+[menus]
+  [[menus.main]]
+    name    = "Log"
+    pageRef = "/posts"
+    weight  = 10
+  [[menus.main]]
+    name    = "Tags"
+    pageRef = "/tags"
+    weight  = 20
+  [[menus.main]]
+    name    = "Search"
+    pageRef = "/search"
+    weight  = 30
+  [[menus.main]]
+    name    = "About"
+    pageRef = "/about"
+    weight  = 40
+
+# -----------------------------------------------------------------------------
+# Output formats.
+# SearchIndex emits /searchindex.json at build time; assets/js/search.js
+# fetches it client-side. No server, no third-party service.
+# -----------------------------------------------------------------------------
+[outputFormats.SearchIndex]
+  mediaType      = "application/json"
+  baseName       = "searchindex"
+  isPlainText    = true
+  notAlternative = true
+
+[outputs]
+  home = ["HTML", "RSS", "SearchIndex"]
+
+[imaging]
+  quality        = 82
+  resampleFilter = "Lanczos"

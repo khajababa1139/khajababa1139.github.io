@@ -1,0 +1,8 @@
+{{- $match := .Get "match" | default "gallery-*" -}}
+<div class="gallery">
+  {{ range $.Page.Resources.Match $match }}
+    {{ $t := .Fit "800x800 webp q80" }}
+    <img src="{{ $t.RelPermalink }}" width="{{ $t.Width }}" height="{{ $t.Height }}" alt="" loading="lazy" decoding="async">
+  {{ end }}
+</div>
+{{ with .Get "caption" }}<p class="mono" style="color:var(--ink-faint);margin-top:-1rem">{{ . }}</p>{{ end }}

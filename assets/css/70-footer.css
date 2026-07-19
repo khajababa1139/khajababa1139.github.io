@@ -1,0 +1,24 @@
+/* ============================================================
+   07 · FOOTER & PAGINATION
+   ============================================================ */
+/* ---------- footer ---------- */
+
+.site-foot {
+  border-top: 2px solid var(--ink);
+  padding-block: 2rem 3rem;
+  margin-top: 3rem;
+  display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between;
+  color: var(--ink-faint);
+}
+.site-foot a { color: var(--ink-soft); text-decoration: none; }
+.site-foot a:hover { color: var(--signal); }
+
+/* ---------- pagination ---------- */
+.pager { display: flex; gap: 0.5rem; justify-content: center; padding-block: 2.5rem; }
+.pager a, .pager span {
+  font-family: "JetBrains Mono", monospace; font-size: 0.78rem;
+  padding: 0.35rem 0.7rem; border: 1px solid var(--rule); border-radius: 2px;
+  text-decoration: none; color: var(--ink-soft);
+}
+.pager a:hover { border-color: var(--signal); color: var(--signal); }
+.pager .is-current { background: var(--signal); border-color: var(--signal); color: #fff; }

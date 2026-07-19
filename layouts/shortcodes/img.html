@@ -1,0 +1,22 @@
+{{- $src := or (.Get "src") (.Get 0) -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $cap := .Get "caption" -}}
+{{- $res := $.Page.Resources.GetMatch $src -}}
+<figure>
+  {{ with $res }}
+    {{ if eq .MediaType.SubType "svg" }}
+      <img src="{{ .RelPermalink }}" alt="{{ $alt }}">
+    {{ else }}
+      {{ $big := .Fit "1400x1400 webp q82" }}
+      {{ $small := .Fit "760x760 webp q82" }}
+      <img src="{{ $big.RelPermalink }}"
+           srcset="{{ $small.RelPermalink }} 760w, {{ $big.RelPermalink }} 1400w"
+           sizes="(max-width: 45rem) 100vw, 40rem"
+           width="{{ $big.Width }}" height="{{ $big.Height }}"
+           alt="{{ $alt }}" loading="lazy" decoding="async">
+    {{ end }}
+  {{ else }}
+    <img src="{{ $src | relURL }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+  {{ end }}
+  {{ with $cap }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+</figure>

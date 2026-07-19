@@ -1,0 +1,25 @@
+{{ define "main" }}
+<section class="wrap">
+  <header class="post-head prose-width">
+    <p class="eyebrow">Find anything</p>
+    <h1>Search the log</h1>
+  </header>
+
+  <div class="prose-width">
+    <div class="search-box">
+      <input id="search-input" type="search"
+             placeholder="e.g. ROS, heat exchanger, ESP32…"
+             autocomplete="off" spellcheck="false"
+             aria-label="Search entries">
+    </div>
+    <p class="search-status" id="search-status" role="status" aria-live="polite">Loading index…</p>
+  </div>
+
+  <div class="ledger search-results" id="search-results"
+       data-index="{{ "searchindex.json" | relURL }}"></div>
+
+  <noscript><p class="prose-width">Search needs JavaScript. Browse
+    <a href="{{ "posts/" | relURL }}">the full log</a> or
+    <a href="{{ "tags/" | relURL }}">tags</a> instead.</p></noscript>
+</section>
+{{ end }}

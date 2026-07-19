@@ -1,0 +1,7 @@
+{{- /* JS pipeline. youtube.js loads everywhere; search.js only on /search. */ -}}
+{{ $yt := resources.Get "js/youtube.js" | minify | fingerprint }}
+<script src="{{ $yt.RelPermalink }}" integrity="{{ $yt.Data.Integrity }}" defer></script>
+{{ if eq .Layout "search" }}
+  {{ $search := resources.Get "js/search.js" | minify | fingerprint }}
+  <script src="{{ $search.RelPermalink }}" integrity="{{ $search.Data.Integrity }}" defer></script>
+{{ end }}

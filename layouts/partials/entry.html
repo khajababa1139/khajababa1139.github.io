@@ -1,0 +1,11 @@
+<a class="entry" href="{{ .RelPermalink }}">
+  <span class="entry__stamp">{{ .Date.Format "2006 · Jan 02" }}</span>
+  <span>
+    <span class="entry__title">{{ .Title }}</span>
+    <span class="entry__sum">{{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 170 }}{{ end }}</span>
+    {{ with .Params.tags }}
+      <span class="entry__tags">{{ range . }}<span class="tag">{{ . }}</span>{{ end }}</span>
+    {{ end }}
+  </span>
+  {{ if .Params.video }}<span class="entry__flag">Video</span>{{ end }}
+</a>

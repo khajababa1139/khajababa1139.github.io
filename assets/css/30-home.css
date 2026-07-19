@@ -1,0 +1,81 @@
+/* ============================================================
+   03 · LANDING PAGE — hero + section frames
+   ============================================================ */
+/* ---------- header ---------- */
+
+.site-head {
+  position: sticky; top: 0; z-index: 40;
+  backdrop-filter: blur(10px);
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
+  border-bottom: 1px solid var(--rule);
+}
+.site-head__inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1.5rem; padding-block: 0.85rem;
+}
+.brand {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800; font-size: 1.05rem;
+  letter-spacing: -0.03em;
+  color: var(--ink); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+}
+.brand__mark {
+  width: 0.68rem; height: 0.68rem;
+  background: var(--signal);
+  border-radius: 1px;
+  transform: rotate(45deg);
+}
+.nav { display: flex; gap: 1.4rem; align-items: center; }
+.nav a {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem; letter-spacing: 0.04em;
+  color: var(--ink-soft); text-decoration: none;
+}
+.nav a:hover, .nav a[aria-current="page"] { color: var(--signal); }
+
+/* ---------- hero ---------- */
+
+.hero { padding-block: clamp(4rem, 12vh, 8.5rem) clamp(2.5rem, 7vh, 5rem); }
+.hero__title {
+  font-size: var(--step-4);
+  font-weight: 800;
+  max-width: 16ch;
+  font-variation-settings: "wdth" 90;
+}
+.hero__title em {
+  font-style: normal;
+  color: var(--signal);
+}
+.hero__intro {
+  margin-top: 1.8rem;
+  max-width: 46ch;
+  font-size: var(--step-1);
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+.hero__meta {
+  margin-top: 2.5rem;
+  display: flex; flex-wrap: wrap; gap: 0.6rem 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+}
+.hero__stat { display: flex; align-items: baseline; gap: 0.5rem; }
+.hero__stat b {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 1.3rem; font-weight: 700; color: var(--ink);
+}
+
+/* ---------- section headings ---------- */
+
+.section { padding-block: clamp(2.5rem, 6vh, 4.5rem); }
+.section__head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 1rem; margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--ink);
+}
+.section__head h2 { font-size: var(--step-2); }
+.section__head a { font-family: "JetBrains Mono", monospace; font-size: 0.78rem; text-decoration: none; }
+.section__head a:hover { text-decoration: underline; }
+

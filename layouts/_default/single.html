@@ -1,0 +1,37 @@
+{{ define "main" }}
+<article class="wrap">
+  <header class="post-head prose-width">
+    <p class="eyebrow">{{ .Date.Format "Monday, January 2, 2006" }}</p>
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.summary }}<p class="hero__intro" style="font-size:var(--step-1);margin-top:1.2rem">{{ . }}</p>{{ end }}
+    <div class="post-head__meta mono">
+      {{ if .Site.Params.showReadingTime }}<span>{{ .ReadingTime }} min read</span>{{ end }}
+      {{ with .Params.tags }}<span class="entry__tags">
+        {{ range . }}<a class="tag" href="{{ (printf "/tags/%s/" (. | urlize)) | relURL }}">{{ . }}</a>{{ end }}
+      </span>{{ end }}
+    </div>
+  </header>
+
+  {{ with .Params.video }}
+    <div class="prose-width">{{ partial "youtube.html" (dict "id" . "title" $.Title) }}</div>
+  {{ end }}
+
+  {{ if and .Params.toc (gt (len .TableOfContents) 100) }}
+    <div class="prose-width toc">
+      <span class="eyebrow">Contents</span>
+      {{ .TableOfContents }}
+    </div>
+  {{ end }}
+
+  <div class="prose prose-width">
+    {{ .Content }}
+  </div>
+
+  <nav class="post-nav prose-width mono" aria-label="More entries">
+    <div>{{ with .PrevInSection }}<a href="{{ .RelPermalink }}"><span class="eyebrow">← Previous</span><span class="post-nav__t">{{ .Title }}</span></a>{{ end }}</div>
+    <div>{{ with .NextInSection }}<a href="{{ .RelPermalink }}"><span class="eyebrow">Next →</span><span class="post-nav__t">{{ .Title }}</span></a>{{ end }}</div>
+  </nav>
+
+  {{ partial "comments.html" . }}
+</article>
+{{ end }}

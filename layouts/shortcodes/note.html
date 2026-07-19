@@ -1,0 +1,4 @@
+<aside class="note">
+  <span class="note__label">{{ with .Get "label" }}{{ . }}{{ else }}Note{{ end }}</span>
+  {{ .Inner | markdownify }}
+</aside>

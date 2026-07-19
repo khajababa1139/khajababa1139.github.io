@@ -1,0 +1,20 @@
+{{- /* One showcase card, fed by an entry in data/projects.yaml.
+     Thumbnail priority: image > video (YouTube thumb) > styled placeholder. */ -}}
+{{- $thumb := "" -}}
+{{- with .image }}{{ $thumb = . | relURL }}
+{{- else }}{{ with .video }}{{ $thumb = printf "https://i.ytimg.com/vi/%s/hqdefault.jpg" . }}{{ end }}
+{{- end -}}
+
+{{- $tag := cond (isset . "link") "a" "div" -}}
+<{{ $tag }} class="card" {{ with .link }}href="{{ . }}" {{ if hasPrefix . "http" }}target="_blank" rel="noopener"{{ end }}{{ end }}>
+  <div class="card__thumb">
+    {{ with $thumb }}<img src="{{ . }}" alt="" loading="lazy" decoding="async">{{ end }}
+  </div>
+  <div class="card__body">
+    <h3 class="card__title">{{ .name }}</h3>
+    <p class="card__sum">{{ .summary }}</p>
+    {{ with .tech }}
+      <span class="entry__tags">{{ range . }}<span class="tag">{{ . }}</span>{{ end }}</span>
+    {{ end }}
+  </div>
+</{{ $tag }}>

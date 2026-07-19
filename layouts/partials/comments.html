@@ -1,0 +1,29 @@
+{{ $g := .Site.Params.giscus }}
+{{ if and $g $g.enable (not (eq .Params.comments false)) }}
+<section class="comments prose-width" id="comments">
+  <div class="comments__head">
+    <span class="eyebrow">Discussion</span>
+    <h2 style="font-size:var(--step-2);margin-top:.4rem">Comments</h2>
+    <p style="color:var(--ink-soft);font-size:.92rem;margin-top:.5rem">
+      Comments are powered by GitHub Discussions. Sign in with a GitHub account to post or react.
+    </p>
+  </div>
+  <script src="https://giscus.app/client.js"
+          data-repo="{{ $g.repo }}"
+          data-repo-id="{{ $g.repoId }}"
+          data-category="{{ $g.category }}"
+          data-category-id="{{ $g.categoryId }}"
+          data-mapping="{{ $g.mapping | default "pathname" }}"
+          data-strict="1"
+          data-reactions-enabled="{{ $g.reactionsEnabled | default "1" }}"
+          data-emit-metadata="0"
+          data-input-position="{{ $g.inputPosition | default "top" }}"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          data-loading="lazy"
+          crossorigin="anonymous"
+          async>
+  </script>
+  <noscript>Enable JavaScript to view comments.</noscript>
+</section>
+{{ end }}

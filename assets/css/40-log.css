@@ -1,0 +1,75 @@
+/* ============================================================
+   04 · THE LOG — ledger rows + tags
+   ============================================================ */
+/* ---------- SIGNATURE: the ledger ---------- */
+
+.ledger { border-top: 1px solid var(--rule); }
+
+.entry {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr auto;
+  gap: 0 1.75rem;
+  align-items: start;
+  padding: 1.35rem 0.9rem 1.35rem 0.75rem;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.18s var(--ease);
+}
+.entry::before {
+  content: "";
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; background: var(--signal);
+  transform: scaleY(0); transform-origin: top;
+  transition: transform 0.22s var(--ease);
+}
+.entry:hover, .entry:focus-visible { background: var(--paper-2); }
+.entry:hover::before, .entry:focus-visible::before { transform: scaleY(1); }
+.entry:hover .entry__title { color: var(--signal); }
+
+.entry__stamp {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem; letter-spacing: 0.06em;
+  color: var(--ink-faint);
+  padding-top: 0.35rem;
+  white-space: nowrap;
+}
+.entry__title {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: var(--step-1); font-weight: 700;
+  line-height: 1.2; letter-spacing: -0.02em;
+  transition: color 0.18s var(--ease);
+}
+.entry__sum {
+  margin-top: 0.4rem; color: var(--ink-soft);
+  font-size: 0.94rem; line-height: 1.55;
+  max-width: 58ch;
+}
+.entry__tags { margin-top: 0.6rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.entry__flag {
+  align-self: center;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--signal);
+  border: 1px solid currentColor;
+  padding: 0.15rem 0.4rem; border-radius: 2px;
+}
+
+@media (max-width: 44rem) {
+  .entry { grid-template-columns: 1fr; gap: 0.35rem; padding-inline: 0.6rem; }
+  .entry__stamp { padding-top: 0; order: -1; }
+  .entry__flag { justify-self: start; margin-top: 0.5rem; }
+}
+
+.tag {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.68rem;
+  color: var(--ink-soft);
+  background: var(--signal-dim);
+  padding: 0.18rem 0.45rem;
+  border-radius: 2px;
+  text-decoration: none;
+}
+a.tag:hover { color: var(--signal); }
+

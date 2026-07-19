@@ -1,0 +1,16 @@
+{{ define "main" }}
+<section class="wrap">
+  <header class="post-head">
+    <p class="eyebrow">Index</p>
+    <h1>Topics</h1>
+  </header>
+  <div class="ledger" style="border-top:2px solid var(--ink)">
+    {{ range .Site.Taxonomies.tags.ByCount }}
+      <a class="entry" href="{{ .Page.RelPermalink }}" style="grid-template-columns:1fr auto">
+        <span class="entry__title">{{ .Page.Title }}</span>
+        <span class="entry__stamp">{{ .Count }} {{ cond (eq .Count 1) "entry" "entries" }}</span>
+      </a>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

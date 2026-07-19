@@ -1,0 +1,65 @@
+# =============================================================================
+# PROJECT SHOWCASE — data/projects.yaml
+# These render as the scrollable cards on the landing page, in this order.
+# To add a project: copy a block, edit, save. No template changes needed.
+#
+# Fields:
+#   name        (required) card title
+#   summary     (required) 1-2 sentences
+#   tech        (required) list of tags shown on the card
+#   link        (optional) where the card points — GitHub repo, post URL, etc.
+#   video       (optional) YouTube ID; used as the card thumbnail
+#   image       (optional) path under static/, e.g. /images/locomari.png
+#               (video/image: if both set, image wins; if neither, a styled
+#                placeholder is shown)
+# =============================================================================
+
+- name: "Mars Rover Autonomy — Team Interplanetar"
+  summary: >
+    Perception, SLAM, and autonomous navigation for BUET's Mars rover.
+    ROS 2 with Nav2 path-planning, RTK GPS localization, CAN bus motor
+    control, and multi-sensor fusion on an NVIDIA Jetson Orin.
+  tech: [ROS 2, Nav2, SLAM, Jetson, CAN]
+  link: "https://github.com/khajababa1139"
+
+- name: "Autonomous Underwater Drone"
+  summary: >
+    Low-cost autonomous underwater vehicle built around an ESP32 and a
+    custom transceiver module, developed as a third-year ME316 project.
+  tech: [ESP32, Embedded, Custom RF]
+  link: "https://github.com/khajababa1139"
+
+- name: "Crop-ium — Crop Disease Detection"
+  summary: >
+    Web app that identifies crop diseases from photos using deep learning,
+    with real-time inference behind a ReactJS interface. Aimed at
+    supporting agricultural communities.
+  tech: [PyTorch, TensorFlow, ReactJS]
+  link: "https://github.com/khajababa1139"
+
+- name: "Loco Mari — E-Bookshop Platform"
+  summary: >
+    Full-stack e-bookshop with separate client, admin, and delivery
+    dashboards and role-based access control throughout.
+  tech: [ReactJS, PostgreSQL, Node.js]
+  link: "https://github.com/khajababa1139"
+
+- name: "Ar-Kr Heat Transfer × LSTM-GRU"
+  summary: >
+    Molecular-dynamics simulation of an argon-krypton binary mixture in
+    LAMMPS, with a custom LSTM-GRU network trained on the simulation
+    characteristics.
+  tech: [LAMMPS, Deep Learning, Research]
+
+- name: "Twisted Tube Heat Exchanger"
+  summary: >
+    Helical twisted-tube heat exchanger with a fouling-resistant mechanism,
+    designed and validated through extensive simulation (ME310).
+  tech: [Ansys, SolidWorks, Thermal]
+
+- name: "KhajaBot — Discord Bot"
+  summary: >
+    Feature-rich Discord bot supporting YouTube streaming, music playback,
+    and interactive games.
+  tech: [JavaScript, discord.js]
+  link: "https://github.com/khajababa1139"

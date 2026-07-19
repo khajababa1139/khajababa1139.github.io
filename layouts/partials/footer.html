@@ -1,0 +1,11 @@
+{{- /* Site footer. Social links come from [params] in hugo.toml. */ -}}
+<footer class="wrap site-foot mono">
+  <div>© {{ now.Year }} {{ .Site.Params.author }} · built with Hugo · hosted on GitHub Pages</div>
+  <div style="display:flex;gap:1.25rem;flex-wrap:wrap">
+    {{ with .Site.Params.github }}<a href="https://github.com/{{ . }}" rel="me">GitHub</a>{{ end }}
+    {{ with .Site.Params.linkedin }}<a href="https://linkedin.com/in/{{ . }}" rel="me">LinkedIn</a>{{ end }}
+    {{ with .Site.Params.email }}<a href="mailto:{{ . }}">Email</a>{{ end }}
+    <a href="{{ "index.xml" | relURL }}">RSS</a>
+  </div>
+</footer>
+{{ partial "scripts.html" . }}
