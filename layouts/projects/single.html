@@ -1,0 +1,35 @@
+{{ define "main" }}
+{{- /* =====================================================================
+     ONE PROJECT  —  /projects/<slug>/
+     Like a log entry, but with a tech list and an optional "View on
+     GitHub" button (from the `repo` field) instead of a reading time.
+     ===================================================================== */ -}}
+<article class="wrap">
+  <header class="post-head prose-width">
+    <p class="eyebrow"><a href="{{ "/projects/" | relURL }}">← Projects</a></p>
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.summary }}<p class="hero__intro" style="font-size:var(--step-1);margin-top:1.2rem">{{ . }}</p>{{ end }}
+    <div class="post-head__meta mono">
+      {{ with .Params.tech }}<span class="entry__tags">
+        {{ range . }}<span class="tag">{{ . }}</span>{{ end }}
+      </span>{{ end }}
+    </div>
+    {{ with .Params.repo }}
+      <p style="margin-top:1.4rem"><a class="btn" href="{{ . }}" target="_blank" rel="noopener">View on GitHub ↗</a></p>
+    {{ end }}
+  </header>
+
+  {{ with .Params.video }}
+    <div class="prose-width">{{ partial "youtube.html" (dict "id" . "title" $.Title) }}</div>
+  {{ end }}
+
+  <div class="prose prose-width">
+    {{ .Content }}
+  </div>
+
+  <nav class="post-nav prose-width mono" aria-label="More projects">
+    <div>{{ with .PrevInSection }}<a href="{{ .RelPermalink }}"><span class="eyebrow">← Previous</span><span class="post-nav__t">{{ .Title }}</span></a>{{ end }}</div>
+    <div>{{ with .NextInSection }}<a href="{{ .RelPermalink }}"><span class="eyebrow">Next →</span><span class="post-nav__t">{{ .Title }}</span></a>{{ end }}</div>
+  </nav>
+</article>
+{{ end }}

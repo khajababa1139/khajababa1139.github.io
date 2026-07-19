@@ -185,41 +185,44 @@ Each concern lives in exactly one file. Find the row, edit that file only.
 | I want to change… | Edit |
 |---|---|
 | Site title, tagline, intro, links, menus | `hugo.toml` |
-| The project cards on the landing page | `data/projects.yaml` |
+| Add / edit a project | `content/projects/<slug>/index.md` (or `./new-project.sh <slug>`) |
 | My About page | `content/about.md` |
 | Colors, fonts, spacing (whole site) | `assets/css/10-tokens-base.css` |
 | Header / nav appearance | `assets/css/20-header.css` |
 | Landing page appearance | `assets/css/30-home.css` + `layouts/index.html` |
 | The log list appearance | `assets/css/40-log.css` + `layouts/partials/entry.html` |
 | Project card appearance | `assets/css/50-showcase.css` + `layouts/partials/project-card.html` |
+| Projects list + single page | `layouts/projects/list.html` + `layouts/projects/single.html` |
 | Post page appearance | `assets/css/60-article.css` + `layouts/_default/single.html` |
 | Search behavior | `assets/js/search.js` |
 | Search appearance | `assets/css/80-search.css` + `layouts/_default/search.html` |
 | What search indexes | `layouts/index.searchindex.json` |
 | Video click-to-load behavior | `assets/js/youtube.js` |
-| New-post template | `archetypes/default.md` |
+| New-post template | `archetypes/posts.md` |
+| New-project template | `archetypes/projects.md` |
 | Deploy pipeline | `.github/workflows/deploy.yml` |
 
 ```
 hugo.toml                    identity, features, menus — the control panel
-data/projects.yaml           landing-page project cards (add projects here)
 content/
   about.md
   search/_index.md           search page stub (layout does the work)
-  posts/<slug>/index.md      one folder per entry, images alongside
+  posts/<slug>/index.md      one folder per log entry, images alongside
+  projects/<slug>/index.md   one folder per project, images alongside
 assets/
   css/10..80-*.css           styling, split by concern, bundled in order
   js/search.js               client-side search
   js/youtube.js              lazy YouTube embeds
 layouts/
   index.html                 landing page
-  index.searchindex.json     build-time search index
+  index.searchindex.json     build-time search index (posts + projects)
   _default/                  single, list, terms, search, baseof, 404
+  projects/                  list + single templates for the Projects section
   partials/                  head, header, footer, scripts, entry,
                              project-card, card, youtube, comments
   shortcodes/                img, gallery, yt, note
 .github/workflows/deploy.yml
-new.sh / publish.sh
+new.sh / new-project.sh / publish.sh
 ```
 
 ## 9. Search

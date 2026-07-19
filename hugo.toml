@@ -82,6 +82,10 @@ full-stack web — and I write up what I build here so others can learn from it.
     pageRef = "/posts"
     weight  = 10
   [[menus.main]]
+    name    = "Projects"
+    pageRef = "/projects"
+    weight  = 15
+  [[menus.main]]
     name    = "Tags"
     pageRef = "/tags"
     weight  = 20

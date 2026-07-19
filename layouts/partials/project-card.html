@@ -1,38 +1,34 @@
-{{- /* One showcase card, fed by an entry in data/projects.yaml.
+{{- /* One showcase card for a project.
 
-     Thumbnail priority: image > video (YouTube thumb) > empty placeholder.
+     Fed by a project PAGE from content/projects/<slug>/index.md.
+     Every card links to that project's own page (never straight to GitHub —
+     the GitHub link lives on the project page as a button).
 
-     Note: cards with a `link` render as <a>, cards without render as <div>.
-     These are written out as two literal blocks rather than a dynamic tag
-     name, because Hugo escapes template actions in tag-name position. */ -}}
+     Thumbnail priority:
+       1. an image named cover.* in the project folder
+       2. `image` in front matter (path under static/)
+       3. `video` in front matter (uses the YouTube thumbnail)
+       4. none -> a styled placeholder rule (see .card__thumb:empty in CSS) */ -}}
 
+{{- $page := . -}}
 {{- $thumb := "" -}}
-{{- with .image }}
-  {{- $thumb = . | relURL -}}
+{{- with $page.Resources.GetMatch "cover.*" -}}
+  {{- $thumb = (.Fit "640x400 webp q82").RelPermalink -}}
 {{- else -}}
-  {{- with .video }}{{ $thumb = printf "https://i.ytimg.com/vi/%s/hqdefault.jpg" . }}{{ end -}}
+  {{- with $page.Params.image -}}
+    {{- $thumb = . | relURL -}}
+  {{- else -}}
+    {{- with $page.Params.video -}}{{- $thumb = printf "https://i.ytimg.com/vi/%s/hqdefault.jpg" . -}}{{- end -}}
+  {{- end -}}
 {{- end -}}
 
-{{- if .link -}}
-<a class="card" href="{{ .link }}"{{ if hasPrefix .link "http" }} target="_blank" rel="noopener"{{ end }}>
+<a class="card" href="{{ $page.RelPermalink }}">
   <div class="card__thumb">
     {{ with $thumb }}<img src="{{ . }}" alt="" loading="lazy" decoding="async">{{ end }}
   </div>
   <div class="card__body">
-    <h3 class="card__title">{{ .name }}</h3>
-    <p class="card__sum">{{ .summary }}</p>
-    {{ with .tech }}<span class="entry__tags">{{ range . }}<span class="tag">{{ . }}</span>{{ end }}</span>{{ end }}
+    <h3 class="card__title">{{ $page.Title }}</h3>
+    <p class="card__sum">{{ $page.Params.summary }}</p>
+    {{ with $page.Params.tech }}<span class="entry__tags">{{ range . }}<span class="tag">{{ . }}</span>{{ end }}</span>{{ end }}
   </div>
 </a>
-{{- else -}}
-<div class="card">
-  <div class="card__thumb">
-    {{ with $thumb }}<img src="{{ . }}" alt="" loading="lazy" decoding="async">{{ end }}
-  </div>
-  <div class="card__body">
-    <h3 class="card__title">{{ .name }}</h3>
-    <p class="card__sum">{{ .summary }}</p>
-    {{ with .tech }}<span class="entry__tags">{{ range . }}<span class="tag">{{ . }}</span>{{ end }}</span>{{ end }}
-  </div>
-</div>
-{{- end -}}

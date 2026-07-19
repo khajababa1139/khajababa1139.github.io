@@ -1,6 +1,6 @@
 {{- /* Build-time search index consumed by assets/js/search.js.
-     One object per published post. `body` is plain text, capped to keep
-     the file small even with hundreds of entries. */ -}}
+     One object per published post AND project. `body` is plain text,
+     capped to keep the file small even with hundreds of entries. */ -}}
 {{- $entries := slice -}}
 {{- range where .Site.RegularPages "Section" "posts" -}}
   {{- $entries = $entries | append (dict
@@ -10,6 +10,17 @@
         "dateLabel" (.Date.Format "2006 · Jan 02")
         "summary"   (or .Params.summary (.Summary | plainify | truncate 170))
         "tags"      .Params.tags
+        "body"      (.Plain | truncate 5000)
+      ) -}}
+{{- end -}}
+{{- range where .Site.RegularPages "Section" "projects" -}}
+  {{- $entries = $entries | append (dict
+        "title"     .Title
+        "url"       .RelPermalink
+        "date"      (.Date.Format "2006-01-02")
+        "dateLabel" "Project"
+        "summary"   (or .Params.summary (.Summary | plainify | truncate 170))
+        "tags"      .Params.tech
         "body"      (.Plain | truncate 5000)
       ) -}}
 {{- end -}}

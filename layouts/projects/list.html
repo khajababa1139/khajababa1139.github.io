@@ -1,0 +1,22 @@
+{{ define "main" }}
+{{- /* =====================================================================
+     PROJECTS INDEX  —  /projects
+     Mirrors the Log's list page, but renders project cards in a grid
+     instead of ledger rows. Ordered by the `weight` in each project's
+     front matter (1 = first).
+     ===================================================================== */ -}}
+<section class="wrap">
+  <header class="post-head">
+    <p class="eyebrow">Section</p>
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}<div class="prose prose-width" style="margin-top:1.2rem">{{ . }}</div>{{ end }}
+    <div class="post-head__meta mono"><span>{{ len .RegularPages }} projects</span></div>
+  </header>
+
+  <div class="showcase showcase--grid">
+    {{ range .RegularPages.ByWeight }}
+      {{ partial "project-card.html" . }}
+    {{ end }}
+  </div>
+</section>
+{{ end }}

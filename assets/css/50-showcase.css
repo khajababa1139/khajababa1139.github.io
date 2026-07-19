@@ -53,7 +53,7 @@
 /* Cards without an image yet: collapse the empty thumbnail area and mark
    the card with a signal-colour rule instead, so it doesn't read as broken. */
 .card__thumb:empty {
-  aspect-ratio: auto;
+aspect-ratio: auto;
   height: 4px;
   background: linear-gradient(90deg, var(--signal), transparent);
 }
@@ -61,3 +61,30 @@
 /* Keep the scroll hint clear of the section rule on narrow screens. */
 .scroll-hint { white-space: nowrap; }
 @media (max-width: 34rem) { .scroll-hint { display: none; } }
+
+/* ---------- SHOWCASE: grid variant (the /projects page) ----------
+   Same cards, but laid out as a wrapping grid instead of a horizontal
+   scroller. Used on the standalone Projects listing page. */
+.showcase--grid {
+  grid-auto-flow: row;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  grid-auto-columns: auto;
+  overflow: visible;
+  scroll-snap-type: none;
+  margin-inline: 0;
+  padding-inline: 0;
+  padding-bottom: 0;
+  margin-top: 2rem;
+}
+
+/* ---------- BTN: link that reads as a button (e.g. "View on GitHub") ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8rem; letter-spacing: 0.02em;
+  color: var(--paper); background: var(--signal);
+  padding: 0.55rem 1rem; border-radius: 3px;
+  text-decoration: none;
+  transition: opacity 0.18s var(--ease), transform 0.18s var(--ease);
+}
+.btn:hover { opacity: 0.9; transform: translateY(-1px); }

@@ -3,10 +3,11 @@
      LANDING PAGE
      Sections, top to bottom:
        1. Hero        — name, role, tagline, intro, links  (from hugo.toml)
-       2. Projects    — scrollable cards                    (from data/projects.yaml)
+       2. Projects    — scrollable cards                    (from content/projects/)
        3. Recent log  — latest posts                        (from content/posts/)
      ===================================================================== */ -}}
-{{ $posts := where .Site.RegularPages "Section" "posts" }}
+{{ $posts    := where .Site.RegularPages "Section" "posts" }}
+{{ $projects := where .Site.RegularPages "Section" "projects" }}
 
 <section class="wrap hero">
   <p class="eyebrow">{{ .Site.Params.author }} — {{ .Site.Params.role }}</p>
@@ -14,23 +15,23 @@
   <div class="hero__intro">{{ .Site.Params.intro | markdownify }}</div>
 
   <div class="hero__meta mono">
-    <span class="hero__stat"><b>{{ len .Site.Data.projects }}</b> projects</span>
+    <span class="hero__stat"><b>{{ len $projects }}</b> projects</span>
     <span class="hero__stat"><b>{{ len $posts }}</b> log entries</span>
     {{ with .Site.Params.github }}<span class="hero__stat"><a href="https://github.com/{{ . }}">GitHub ↗</a></span>{{ end }}
     {{ with .Site.Params.linkedin }}<span class="hero__stat"><a href="https://linkedin.com/in/{{ . }}">LinkedIn ↗</a></span>{{ end }}
   </div>
 </section>
 
-{{ with .Site.Data.projects }}
+{{ with $projects }}
 <section class="section">
   <div class="wrap">
     <div class="section__head">
       <h2>Projects</h2>
-      <span class="scroll-hint" aria-hidden="true">Scroll →</span>
+      <a href="{{ "projects/" | relURL }}">All {{ len . }} projects →</a>
     </div>
   </div>
   <div class="showcase" tabindex="0" role="region" aria-label="Projects, horizontally scrollable">
-    {{ range . }}
+    {{ range .ByWeight }}
       {{ partial "project-card.html" . }}
     {{ end }}
   </div>
