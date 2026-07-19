@@ -46,11 +46,11 @@ full-stack web — and I write up what I build here so others can learn from it.
   # Flip `enable` to true after filling repoId and categoryId from giscus.app.
   # ---------------------------------------------------------------------------
   [params.giscus]
-    enable           = false
+    enable           = true
     repo             = "khajababa1139/khajababa1139.github.io"
-    repoId           = ""
+    repoId           = "R_kgDOTdY16w"
     category         = "Comments"
-    categoryId       = ""
+    categoryId       = "DIC_kwDOTdY1684DBiSm"
     mapping          = "pathname"
     reactionsEnabled = "1"
     inputPosition    = "top"
