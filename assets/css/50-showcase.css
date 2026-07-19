@@ -11,8 +11,14 @@
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   padding-bottom: 1.25rem;
-  margin-inline: calc(50% - 50vw);
-  padding-inline: max(1.25rem, calc(50vw - var(--w-page) / 2));
+  /* Gutter that lines the first card up with .wrap (the "Projects" heading).
+     It's set as BOTH padding (the visual space) and scroll-padding — without
+     scroll-padding, `scroll-snap-align: start` snaps each card to the
+     padding-box edge, which auto-scrolls the left gutter away on load and
+     leaves the first card stuck against the screen edge. */
+  --showcase-gutter: max(1.25rem, calc((100% - var(--w-page)) / 2));
+  padding-inline: var(--showcase-gutter);
+  scroll-padding-inline: var(--showcase-gutter);
   scrollbar-width: thin;
   scrollbar-color: var(--ink-faint) transparent;
 }
