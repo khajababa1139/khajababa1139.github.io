@@ -1,81 +1,175 @@
 /* ============================================================
    03 · LANDING PAGE — hero + section frames
+   Enhanced with entrance animations and hover effects.
    ============================================================ */
-/* ---------- header ---------- */
 
-.site-head {
-  position: sticky; top: 0; z-index: 40;
-  backdrop-filter: blur(10px);
-  background: color-mix(in srgb, var(--paper) 82%, transparent);
-  border-bottom: 1px solid var(--rule);
+/* ---------- animations ---------- */
+
+@keyframes fadeInUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
-.site-head__inner {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 1.5rem; padding-block: 0.85rem;
+
+@keyframes fadeInLeft {
+  from { transform: translateX(-30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }
-.brand {
-  font-family: "Bricolage Grotesque", sans-serif;
-  font-weight: 800; font-size: 1.05rem;
-  letter-spacing: -0.03em;
-  color: var(--ink); text-decoration: none;
-  display: inline-flex; align-items: center; gap: 0.5rem;
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
 }
-.brand__mark {
-  width: 0.68rem; height: 0.68rem;
-  background: var(--signal);
-  border-radius: 1px;
-  transform: rotate(45deg);
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
 }
-.nav { display: flex; gap: 1.4rem; align-items: center; }
-.nav a {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.78rem; letter-spacing: 0.04em;
-  color: var(--ink-soft); text-decoration: none;
-}
-.nav a:hover, .nav a[aria-current="page"] { color: var(--signal); }
 
 /* ---------- hero ---------- */
 
-.hero { padding-block: clamp(4rem, 12vh, 8.5rem) clamp(2.5rem, 7vh, 5rem); }
+.hero { 
+  padding-block: clamp(4rem, 12vh, 8.5rem) clamp(2.5rem, 7vh, 5rem);
+  animation: fadeInUp 0.8s var(--ease) both;
+}
+
 .hero__title {
   font-size: var(--step-4);
   font-weight: 800;
   max-width: 16ch;
   font-variation-settings: "wdth" 90;
+  background: linear-gradient(90deg, var(--ink), var(--signal), var(--ink));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
 }
+
 .hero__title em {
   font-style: normal;
   color: var(--signal);
+  -webkit-text-fill-color: var(--signal);
+  display: inline-block;
+  transition: transform 0.3s var(--ease-bounce);
 }
+
+.hero:hover .hero__title em {
+  transform: scale(1.05);
+}
+
 .hero__intro {
   margin-top: 1.8rem;
   max-width: 46ch;
   font-size: var(--step-1);
   color: var(--ink-soft);
   line-height: 1.5;
+  animation: fadeInUp 0.8s var(--ease) 0.2s both;
 }
+
 .hero__meta {
   margin-top: 2.5rem;
   display: flex; flex-wrap: wrap; gap: 0.6rem 2rem;
   padding-top: 1rem;
   border-top: 1px solid var(--rule);
+  animation: fadeInUp 0.8s var(--ease) 0.4s both;
 }
-.hero__stat { display: flex; align-items: baseline; gap: 0.5rem; }
+
+.hero__stat { 
+  display: flex; align-items: baseline; gap: 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.hero__stat:hover {
+  transform: translateY(-2px);
+}
+
 .hero__stat b {
   font-family: "Bricolage Grotesque", sans-serif;
   font-size: 1.3rem; font-weight: 700; color: var(--ink);
 }
 
+.hero__stat a {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.hero__stat a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--signal);
+  transition: width 0.3s var(--ease);
+}
+
+.hero__stat a:hover::after {
+  width: 100%;
+}
+
 /* ---------- section headings ---------- */
 
-.section { padding-block: clamp(2.5rem, 6vh, 4.5rem); }
+.section { 
+  padding-block: clamp(2.5rem, 6vh, 4.5rem);
+  opacity: 0;
+  animation: fadeInUp 0.8s var(--ease) both;
+}
+
+.section:nth-of-type(1) { animation-delay: 0.1s; }
+.section:nth-of-type(2) { animation-delay: 0.2s; }
+.section:nth-of-type(3) { animation-delay: 0.3s; }
+
 .section__head {
   display: flex; align-items: baseline; justify-content: space-between;
   gap: 1rem; margin-bottom: 1.5rem;
   padding-bottom: 0.75rem;
   border-bottom: 2px solid var(--ink);
+  position: relative;
 }
-.section__head h2 { font-size: var(--step-2); }
-.section__head a { font-family: "JetBrains Mono", monospace; font-size: 0.78rem; text-decoration: none; }
-.section__head a:hover { text-decoration: underline; }
+
+.section__head h2 { 
+  font-size: var(--step-2);
+  position: relative;
+  display: inline-block;
+}
+
+.section__head h2::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: var(--signal);
+  transition: width 0.4s var(--ease);
+}
+
+.section__head:hover h2::after {
+  width: 100%;
+}
+
+.section__head a { 
+  font-family: "JetBrains Mono", monospace; 
+  font-size: 0.78rem; 
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.section__head a::before {
+  content: '→';
+  display: inline-block;
+  margin-right: 0;
+  transition: margin-right 0.2s var(--ease);
+}
+
+.section__head a:hover::before {
+  margin-right: 0.4rem;
+}
+
+.section__head a:hover { 
+  text-decoration: underline;
+  color: var(--signal);
+}
 
