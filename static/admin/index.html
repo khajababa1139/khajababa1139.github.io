@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin - Estyak Ahamed</title>
+  <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+<script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+<script>
+  // Initialize Decap CMS with custom configuration
+  CMS.init({
+    config: {
+      backend: {
+        name: 'git-gateway',
+        branch: 'main',
+        auth_scope: 'repo',
+        commit_messages: {
+          create: 'Create {{collection}} "{{slug}}"',
+          update: 'Update {{collection}} "{{slug}}"',
+          delete: 'Delete {{collection}} "{{slug}}"',
+          uploadMedia: 'Upload "{{path}}"',
+          deleteMedia: 'Delete "{{path}}"',
+          openAuthoring: '{{message}}'
+        }
+      },
+      media_folder: 'static/uploads',
+      public_folder: '/uploads',
+      collections: [
+        {
+          name: 'posts',
+          label: 'Blog Posts',
+          folder: 'content/posts',
+          create: true,
+          slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
+          editor: {
+            preview: false
+          },
+          fields: [
+            { label: 'Title', name: 'title', widget: 'string' },
+            { 
+              label: 'Publish Date', 
+              name: 'date', 
+              widget: 'datetime',
+              format: 'YYYY-MM-DDTHH:mm:ssZ',
+              dateFormat: 'MMMM DD YYYY',
+              timeFormat: true
+            },
+            { 
+              label: 'Draft', 
+              name: 'draft', 
+              widget: 'boolean',
+              default: false,
+              hint: 'Uncheck to publish immediately'
+            },
+            { 
+              label: 'Summary', 
+              name: 'summary', 
+              widget: 'text',
+              required: false,
+              hint: 'Brief description shown on the listing page'
+            },
+            { 
+              label: 'Tags', 
+              name: 'tags', 
+              widget: 'list',
+              default: [],
+              hint: 'Add tags for categorization'
+            },
+            { 
+              label: 'YouTube Video ID', 
+              name: 'video', 
+              widget: 'string',
+              required: false,
+              hint: 'Optional YouTube video ID (e.g., dQw4w9WgXcQ)'
+            },
+            { 
+              label: 'Show Table of Contents', 
+              name: 'toc', 
+              widget: 'boolean',
+              default: true
+            },
+            { 
+              label: 'Cover Image', 
+              name: 'cover', 
+              widget: 'image',
+              required: false,
+              hint: 'Optional cover image for social sharing'
+            },
+            { 
+              label: 'Body', 
+              name: 'body', 
+              widget: 'markdown',
+              hint: 'Write your post here. Supports Markdown, paste images directly, use $$ for math equations, and ``` for code blocks.'
+            }
+          ]
+        },
+        {
+          name: 'projects',
+          label: 'Projects',
+          folder: 'content/projects',
+          create: true,
+          slug: '{{slug}}',
+          editor: {
+            preview: false
+          },
+          fields: [
+            { label: 'Title', name: 'title', widget: 'string' },
+            { 
+              label: 'Weight', 
+              name: 'weight', 
+              widget: 'number',
+              default: 0,
+              hint: 'Lower numbers appear first'
+            },
+            { 
+              label: 'Summary', 
+              name: 'summary', 
+              widget: 'text',
+              required: false
+            },
+            { 
+              label: 'Tech Stack', 
+              name: 'tech', 
+              widget: 'list',
+              default: [],
+              hint: 'Technologies used (e.g., ROS2, Python, SolidWorks)'
+            },
+            { 
+              label: 'GitHub Repo', 
+              name: 'github', 
+              widget: 'string',
+              required: false,
+              hint: 'Optional GitHub repository URL'
+            },
+            { 
+              label: 'Cover Image', 
+              name: 'cover', 
+              widget: 'image',
+              required: false
+            },
+            { 
+              label: 'Body', 
+              name: 'body', 
+              widget: 'markdown',
+              hint: 'Project details. Supports Markdown, images, math, and code.'
+            }
+          ]
+        },
+        {
+          name: 'pages',
+          label: 'Pages',
+          files: [
+            {
+              file: 'content/about.md',
+              name: 'about',
+              label: 'About Page',
+              fields: [
+                { label: 'Title', name: 'title', widget: 'string' },
+                { label: 'Body', name: 'body', widget: 'markdown' }
+              ]
+            },
+            {
+              file: 'content/_index.md',
+              name: 'home',
+              label: 'Home Page Content',
+              fields: [
+                { label: 'Title', name: 'title', widget: 'string' },
+                { label: 'Body', name: 'body', widget: 'markdown', required: false }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  });
+</script>
+</body>
+</html>

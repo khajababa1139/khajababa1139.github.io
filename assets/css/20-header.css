@@ -1,18 +1,47 @@
 /* ============================================================
    02 · HEADER & NAVIGATION
+   Fixed header with backdrop blur and entrance animation.
    ============================================================ */
+
+/* ---------- animations ---------- */
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
 /* ---------- primitives ---------- */
 
 .wrap { width: min(100% - 2.5rem, var(--w-page)); margin-inline: auto; }
 .prose-width { width: min(100%, var(--w-text)); }
 
-a { color: var(--signal); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
-a:hover { text-decoration-thickness: 2px; }
+a { 
+  color: var(--signal); 
+  text-decoration-thickness: 1px; 
+  text-underline-offset: 0.18em;
+  transition: all 0.2s ease;
+}
+
+a:hover { 
+  text-decoration-thickness: 2px;
+  transform: translateX(2px);
+}
 
 :focus-visible {
   outline: 2px solid var(--signal);
   outline-offset: 3px;
   border-radius: 2px;
+  transition: outline-offset 0.2s ease;
 }
 
 .mono {
@@ -42,6 +71,120 @@ h1, h2, h3, h4 {
   position: absolute; left: -9999px;
   background: var(--signal); color: #fff;
   padding: 0.6rem 1rem; z-index: 100;
+  transition: all 0.2s ease;
 }
+
 .skip-link:focus { left: 1rem; top: 1rem; }
+
+/* ---------- header ---------- */
+
+.site-head {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: color-mix(in oklab, var(--paper) 85%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+  animation: slideDown 0.6s var(--ease) both;
+}
+
+.site-head__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: var(--step-0);
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s var(--ease);
+}
+
+.brand:hover {
+  color: var(--signal);
+  transform: translateX(3px);
+}
+
+.brand__mark {
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  background: var(--signal);
+  border-radius: 2px;
+  transform: rotate(45deg);
+  transition: transform 0.4s var(--ease-bounce), box-shadow 0.2s ease;
+}
+
+.brand:hover .brand__mark {
+  transform: rotate(225deg) scale(1.15);
+  box-shadow: 0 0 12px var(--signal);
+}
+
+.nav {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.nav a {
+  display: inline-block;
+  padding: 0.4rem 0.75rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.25s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--signal-dim);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s var(--ease);
+  z-index: -1;
+  opacity: 0.7;
+}
+
+.nav a:hover::before,
+.nav a[aria-current="page"]::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.nav a:hover,
+.nav a[aria-current="page"] {
+  color: var(--signal);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+  .site-head__inner {
+    flex-wrap: wrap;
+  }
+  .nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 0.15rem;
+  }
+  .nav a {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.8rem;
+  }
+}
 
